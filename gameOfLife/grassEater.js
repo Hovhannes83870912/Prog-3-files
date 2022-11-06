@@ -1,19 +1,19 @@
-class GrassEater{
-    constructor(x,y){
-        this.x =x
+class GrassEater {
+    constructor(x, y) {
+        this.x = x
         this.y = y
         this.energy = 8
         this.directions = [];
     }
-    getNewCoordinates(){
+    getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
-            [this.x    , this.y - 1],
+            [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
-            [this.x - 1, this.y    ],
-            [this.x + 1, this.y    ],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
             [this.x - 1, this.y + 1],
-            [this.x    , this.y + 1],
+            [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
     }
@@ -30,11 +30,11 @@ class GrassEater{
         }
         return found;
     }
-    mul () {
+    mul() {
         var emptyCells = this.ChooseCell(0);
         var newCell = random(emptyCells);
 
-        if(newCell){
+        if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 2;
@@ -49,7 +49,7 @@ class GrassEater{
         this.energy--
         var emptyCells = this.ChooseCell(0);
         var newCell = random(emptyCells);
-        if(newCell && this.energy >= 0) {
+        if (newCell && this.energy >= 0) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = matrix[this.y][this.x]
@@ -64,7 +64,7 @@ class GrassEater{
     eat() {
         var emptyCells = this.ChooseCell(1);
         var newCell = random(emptyCells);
-        if(newCell) {
+        if (newCell) {
             this.energy++
             var newX = newCell[0];
             var newY = newCell[1];
@@ -72,7 +72,7 @@ class GrassEater{
             matrix[this.y][this.x] = 0;
             this.x = newX
             this.y = newY
-            if(this.energy > 18) {
+            if (this.energy > 18) {
                 this.mul()
             }
             for (var i in grasses) {

@@ -14,7 +14,7 @@
 //     [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 //     [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 // ]
-let matrix  = [];
+let matrix = [];
 var grasses = [];
 var grassEaterArr = [];
 var Something = [];
@@ -22,27 +22,27 @@ var PredatorArr = [];
 var BombArr = [];
 var side = 30
 function setup() {
-    function matrixGenerator(matrixSize, grassCount, grassEaterCount, somethingCount,predatorCount) {
+    function matrixGenerator(matrixSize, grassCount, grassEaterCount, somethingCount, predatorCount) {
         for (let i = 0; i < matrixSize; i++) {
-        matrix[i] = []
-        for (let o = 0; o < matrixSize; o++) {
-        matrix[i][o] = 0;
-        }
+            matrix[i] = []
+            for (let o = 0; o < matrixSize; o++) {
+                matrix[i][o] = 0;
+            }
         }
         for (let i = 0; i < grassCount; i++) {
-        let x = Math.floor(random(matrixSize));
-        let y = Math.floor(random(matrixSize));
-        matrix[y][x] = 1;
+            let x = Math.floor(random(matrixSize));
+            let y = Math.floor(random(matrixSize));
+            matrix[y][x] = 1;
         }
         for (let i = 0; i < grassEaterCount; i++) {
-        let x = Math.floor(random(matrixSize));
-        let y = Math.floor(random(matrixSize));
-        matrix[y][x] = 2;
+            let x = Math.floor(random(matrixSize));
+            let y = Math.floor(random(matrixSize));
+            matrix[y][x] = 2;
         }
         for (let i = 0; i < somethingCount; i++) {
-        let x = Math.floor(random(matrixSize));
-        let y = Math.floor(random(matrixSize));
-        matrix[y][x] = 3;
+            let x = Math.floor(random(matrixSize));
+            let y = Math.floor(random(matrixSize));
+            matrix[y][x] = 3;
         }
         for (let i = 0; i < predatorCount; i++) {
             let x = Math.floor(random(matrixSize));
@@ -55,28 +55,28 @@ function setup() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
-                let grassObject = new Grass(x,y);
+                let grassObject = new Grass(x, y);
                 grasses.push(grassObject)
-              }
+            }
             else if (matrix[y][x] == 2) {
-                let grassEaterObject = new GrassEater(x,y);
+                let grassEaterObject = new GrassEater(x, y);
                 grassEaterArr.push(grassEaterObject)
             }
             else if (matrix[y][x] == 3) {
-                let newSomething = new Lie (x,y);
+                let newSomething = new Lie(x, y);
                 Something.push(newSomething)
             }
             else if (matrix[y][x] == 5) {
-                let newPredator = new Predator (x,y);
+                let newPredator = new Predator(x, y);
                 PredatorArr.push(newPredator)
             }
         }
     }
 
-   frameRate(5);
-   createCanvas(matrix[0].length * side,matrix.length * side)
-   background('#acacac');
-   var bomb = new Bomb(matrix.length + 1,matrix.length + 1)
+    frameRate(5);
+    createCanvas(matrix[0].length * side, matrix.length * side)
+    background('#acacac');
+    var bomb = new Bomb(matrix.length + 1, matrix.length + 1)
     BombArr.push(bomb)
     console.log(BombArr);
 }
@@ -113,19 +113,19 @@ function draw() {
             }
         }
     }
-    for (let i in grasses){
+    for (let i in grasses) {
         grasses[i].mul();
     }
-    for (let i in BombArr){
+    for (let i in BombArr) {
         BombArr[i].fall();
     }
-    for (let i in grassEaterArr){
+    for (let i in grassEaterArr) {
         grassEaterArr[i].eat();
     }
-    for (let i in Something){
+    for (let i in Something) {
         Something[i].move();
     }
-    for (let i in PredatorArr){
+    for (let i in PredatorArr) {
         PredatorArr[i].eat();
     }
 }

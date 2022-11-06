@@ -1,20 +1,20 @@
 class Lie {
-    constructor(x,y){
+    constructor(x, y) {
         this.x = x
         this.y = y
         this.energy = 16
         this.multiplay = 0
         this.directions = [];
     }
-    getNewCoordinates(){
+    getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
-            [this.x    , this.y - 1],
+            [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
-            [this.x - 1, this.y    ],
-            [this.x + 1, this.y    ],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
             [this.x - 1, this.y + 1],
-            [this.x    , this.y + 1],
+            [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
     }
@@ -44,11 +44,11 @@ class Lie {
         }
         return found;
     }
-    mull(){
+    mull() {
         var emptyCells = this.ChooseMullCell(0);
         var newCell = random(emptyCells);
 
-        if(newCell){
+        if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 3;
@@ -58,7 +58,7 @@ class Lie {
             this.energy = 16;
         }
     }
-    die(Y,X){
+    die(Y, X) {
         matrix[this.y][this.x] = 0
         for (var i in Something) {
             if (X == Something[i].x && Y == Something[i].y) {
@@ -73,24 +73,24 @@ class Lie {
         var emptyCells = this.ChooseCell();
         var newCell = random(emptyCells);
         if (this.energy > 0) {
-          if(emptyCells == 0){
-          }
-          if(emptyCells != 0){
-            var newX = newCell[0]
-            var newY = newCell[1]
-            matrix[newY][newX] = 3
-            this.eat(newX,newY)
-            matrix[this.y][this.x] = 0
-            this.y = newY
-            this.x = newX
-            this.mull()
-          }
+            if (emptyCells == 0) {
+            }
+            if (emptyCells != 0) {
+                var newX = newCell[0]
+                var newY = newCell[1]
+                matrix[newY][newX] = 3
+                this.eat(newX, newY)
+                matrix[this.y][this.x] = 0
+                this.y = newY
+                this.x = newX
+                this.mull()
+            }
         }
         else if (this.energy == 0) {
-          this.die(newX,newY)
+            this.die(newX, newY)
         }
     }
-    eat(newX,newY){
+    eat(newX, newY) {
         for (var i in PredatorArr) {
             if (newX == PredatorArr[i].x && newY == PredatorArr[i].y) {
                 PredatorArr.splice(i, 1);

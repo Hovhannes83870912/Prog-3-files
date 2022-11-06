@@ -1,19 +1,19 @@
 class Bomb {
-    constructor(x,y){
+    constructor(x, y) {
         this.time = 0
-        this.x = x 
+        this.x = x
         this.y = y
     }
-    getNewCoordinates(){
+    getNewCoordinates() {
         this.directions = [
             [this.x, this.y],
             [this.x - 1, this.y - 1],
-            [this.x    , this.y - 1],
+            [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
-            [this.x - 1, this.y    ],
-            [this.x + 1, this.y    ],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
             [this.x - 1, this.y + 1],
-            [this.x    , this.y + 1],
+            [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
     }
@@ -23,73 +23,73 @@ class Bomb {
         for (var i in this.directions) {
             var newX = this.directions[i][0];
             var newY = this.directions[i][1];
-            if (newX >= 0 && newX < matrix[0].length && newY >= 0 && newY < matrix.length){
+            if (newX >= 0 && newX < matrix[0].length && newY >= 0 && newY < matrix.length) {
                 found.push(this.directions[i]);
-                
+
             }
         }
         return found;
     }
-    fall(){
+    fall() {
         this.time++
         console.log(this.time)
-        if (this.time == 5){
+        if (this.time == 5) {
             let x = Math.floor(random(matrix.length));
             let y = Math.floor(random(matrix.length));
             matrix[x][y] = 8
-            this.x = x 
+            this.x = x
             this.y = y
             this.explore()
             this.hide()
             this.time = 0
-        }  
-        else if(this.time == 1){
+        }
+        else if (this.time == 1) {
             this.hideAfterKilling()
         }
     }
-    explore(){
+    explore() {
         var diametr = this.chooseCell()
-        for(let i in diametr){
+        for (let i in diametr) {
             matrix[diametr[i][0]][diametr[i][1]] = 8
         }
     }
-    hide(){
+    hide() {
         var diametr = this.chooseCell()
-        for(let i in diametr){
+        for (let i in diametr) {
             matrix[diametr[i][0]][diametr[i][1]] = 8
-                for (var j in grasses) {
-                    if (diametr[i][1] == grasses[j].x && diametr[i][0] == grasses[j].y) {
-                        grasses.splice(j, 1);
-                        matrix[diametr[i][0]][diametr[i][1]] = 8
-                        break
-                    }
+            for (var j in grasses) {
+                if (diametr[i][1] == grasses[j].x && diametr[i][0] == grasses[j].y) {
+                    grasses.splice(j, 1);
+                    matrix[diametr[i][0]][diametr[i][1]] = 8
+                    break
                 }
-                for (var j in grassEaterArr) {
-                    if (diametr[i][1] == grassEaterArr[j].x && diametr[i][0] == grassEaterArr[j].y) {
-                        grassEaterArr.splice(j, 1);
-                        matrix[diametr[i][0]][diametr[i][1]] = 8
-                        break
-                    }
+            }
+            for (var j in grassEaterArr) {
+                if (diametr[i][1] == grassEaterArr[j].x && diametr[i][0] == grassEaterArr[j].y) {
+                    grassEaterArr.splice(j, 1);
+                    matrix[diametr[i][0]][diametr[i][1]] = 8
+                    break
                 }
-                for (var j in Something) {
-                    if (diametr[i][1] == Something[j].x && diametr[i][0] == Something[j].y) {
-                        Something.splice(j, 1);
-                        matrix[diametr[i][0]][diametr[i][1]] = 8
-                        break
-                    }
+            }
+            for (var j in Something) {
+                if (diametr[i][1] == Something[j].x && diametr[i][0] == Something[j].y) {
+                    Something.splice(j, 1);
+                    matrix[diametr[i][0]][diametr[i][1]] = 8
+                    break
                 }
-                for (var j in PredatorArr) {
-                    if (diametr[i][1] == PredatorArr[j].x && diametr[i][0] == PredatorArr[j].y) {
-                        PredatorArr.splice(j, 1);
-                        matrix[diametr[i][0]][diametr[i][1]] = 8
-                        break
-                    }
+            }
+            for (var j in PredatorArr) {
+                if (diametr[i][1] == PredatorArr[j].x && diametr[i][0] == PredatorArr[j].y) {
+                    PredatorArr.splice(j, 1);
+                    matrix[diametr[i][0]][diametr[i][1]] = 8
+                    break
                 }
+            }
         }
     }
-    hideAfterKilling(){
+    hideAfterKilling() {
         var diametr = this.chooseCell()
-        for(let i in diametr){
+        for (let i in diametr) {
             matrix[diametr[i][0]][diametr[i][1]] = 0
         }
     }
