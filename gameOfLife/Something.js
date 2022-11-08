@@ -1,10 +1,8 @@
-class Lie {
+class Lie extends LivingCreature {
     constructor(x, y) {
-        this.x = x
-        this.y = y
+        super(x, y);
         this.energy = 16
         this.multiplay = 0
-        this.directions = [];
     }
     getNewCoordinates() {
         this.directions = [
@@ -18,27 +16,18 @@ class Lie {
             [this.x + 1, this.y + 1]
         ];
     }
-    ChooseCell() {
-        this.getNewCoordinates()
-        var found = [];
-        for (var i in this.directions) {
-            var newX = this.directions[i][0];
-            var newY = this.directions[i][1];
-            if (newX >= 0 && newX < matrix[0].length && newY >= 0 && newY < matrix.length)
-                if (matrix[newY][newX] == 5) {
-                    found.push(this.directions[i]);
-                }
-        }
-        return found;
+    ChooseCell(ch) {
+        this.getNewCoordinates();
+        return super.chooseCell(ch);
     }
-    ChooseMullCell() {
+    ChooseMullCell(ch) {
         this.getNewCoordinates()
         var found = [];
         for (var i in this.directions) {
             var newX = this.directions[i][0];
             var newY = this.directions[i][1];
             if (newX >= 0 && newX < matrix[0].length && newY >= 0 && newY < matrix.length)
-                if (matrix[newY][newX] == 0 || matrix[newY][newX] == 0) {
+                if (matrix[newY][newX] == ch) {
                     found.push(this.directions[i]);
                 }
         }
@@ -70,7 +59,7 @@ class Lie {
     move() {
         this.energy = this.energy - 1
         console.log(this.energy)
-        var emptyCells = this.ChooseCell();
+        var emptyCells = this.ChooseCell(5);
         var newCell = random(emptyCells);
         if (this.energy > 0) {
             if (emptyCells == 0) {

@@ -50,7 +50,7 @@ function setup() {
             matrix[y][x] = 5;
         }
     }
-    matrixGenerator(10, 2, 2, 2, 6)
+    matrixGenerator(10, 5, 5, 5, 5)
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -116,9 +116,9 @@ function draw() {
     for (let i in grasses) {
         grasses[i].mul();
     }
-    for (let i in BombArr) {
-        BombArr[i].fall();
-    }
+    // for (let i in BombArr) {
+    //     BombArr[i].fall();
+    // }
     for (let i in grassEaterArr) {
         grassEaterArr[i].eat();
     }

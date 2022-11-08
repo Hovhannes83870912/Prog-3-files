@@ -1,9 +1,7 @@
-class GrassEater {
-    constructor(x, y) {
-        this.x = x
-        this.y = y
-        this.energy = 8
-        this.directions = [];
+class GrassEater extends LivingCreature {
+    constructor(x, y, index) {
+        super(x, y, index);
+        this.energy = 8;
     }
     getNewCoordinates() {
         this.directions = [
@@ -18,17 +16,8 @@ class GrassEater {
         ];
     }
     ChooseCell(character) {
-        this.getNewCoordinates()
-        var found = [];
-        for (var i in this.directions) {
-            var newX = this.directions[i][0];
-            var newY = this.directions[i][1];
-            if (newX >= 0 && newX < matrix[0].length && newY >= 0 && newY < matrix.length)
-                if (matrix[newY][newX] == character) {
-                    found.push(this.directions[i]);
-                }
-        }
-        return found;
+        this.getNewCoordinates();
+        return super.chooseCell(character);
     }
     mul() {
         var emptyCells = this.ChooseCell(0);
